@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Students - CloudTrack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #ffffff;
+      padding: 40px 20px;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .table-container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      color: #333;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #1e3c72;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #ffffff;
+      color: #1e3c72;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #f2f2f2;
+    }
+
+    .empty-msg {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Registered Students</h1>
+
+  {% if students %}
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, student in students.values() %}
+          <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p class="empty-msg">No students found in the system.</p>
+  {% endif %}
+
+  <div style="text-align: center;">
+    <a href="{{ url_for('dashboard') }}" class="back-btn">← Back to Dashboard</a>
+  </div>
+
+</body>
+</html>
